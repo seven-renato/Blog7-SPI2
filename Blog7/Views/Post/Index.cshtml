@@ -1,0 +1,34 @@
+@model IEnumerable<Blog7.Models.Post>
+
+@{
+ViewData["Title"] = "Index";
+}
+
+<h1>@ViewBag.CurrentUser.Username's Posts</h1>
+
+
+<a asp-action="Create" class="btn btn-primary mb-4">Create New</a>
+<div class="list-group">
+    @foreach (var item in Model) {
+    <div class="list-group-item mb-4">
+        <h5 class="mb-1">@item.Title</h5>
+        <small class="text-muted">@item.TimeStamp</small>
+        <p class="mb-1">
+            @if (!string.IsNullOrEmpty(item.Content))
+            {
+            var contentPreview = item.Content.Length > 100 ? item.Content.Substring(0, 100) + "..." : item.Content;
+            @contentPreview
+            }
+            else
+            {
+                <p>No Content</p>
+            }
+        </p>
+        <div class="float-right">
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm border-1 border-dark">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm border-1 border-dark">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+    }
+</div>

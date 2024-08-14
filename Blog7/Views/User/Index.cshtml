@@ -1,0 +1,39 @@
+@model Blog7.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div>
+    <h1>Login</h1>
+</div>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-action="Login" method="post">
+    <div class="form-control">
+        <label asp-for="Username" class="control-label">Username</label>
+        <input class="form-control" type="text" placeholder="Enter your username" asp-for="Username"/>
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-control">
+        <label asp-for="Password" class="control-label">Password</label>
+        <input class="form-control" type="password" placeholder="Enter your password" asp-for="Password"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<div>
+    Don't have an account? <a asp-action="RegisterUser" asp-controller="User">Register here!</a>
+</div>

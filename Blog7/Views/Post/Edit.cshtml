@@ -1,0 +1,40 @@
+@model Blog7.Models.Post
+
+@{
+ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Post</h1>
+
+<h4>Post</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden field for Id -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Hidden field for TimeStamp to avoid modification -->
+            <input type="hidden" asp-for="TimeStamp" />
+            
+            <input type="hidden" asp-for="User" />
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
